@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 function SignupForm({ setIsLoggedIn }) {
+  const [accountType, setAccountType] = useState("student");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -13,6 +14,7 @@ function SignupForm({ setIsLoggedIn }) {
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
   function changeHandler(event) {
     event.preventDefault();
     setFormData((prevData) => ({
@@ -32,11 +34,14 @@ function SignupForm({ setIsLoggedIn }) {
   }
   return (
     <div>
-      <div>
-        <button>Student</button>
-        <button>Instructor</button>
+      <div className="flex gap-x-2 bg-richblack-800 my-6 rounded-full max-w-max p-1">
+        <button className={`${accountType === "student" ? "bg-richblack-900 text-white " : "bg-transparent text-black"} py-2 px-5 rounded-full transition-all duration-200" `} onClick={() => setAccountType("student")}>Student</button>
+        <button className={`${accountType !== "student" ? "bg-richblack-900 text-white " : "bg-transparent text-black"} py-2 px-5 rounded-full transition-all duration-200" `} onClick={() => setAccountType("teacher")}>Instructor</button>
       </div>
-      <form onSubmit={submitHanlder} className="flex flex-col gap-y-2 mt-[20px]">
+      <form
+        onSubmit={submitHanlder}
+        className="flex flex-col gap-y-2 mt-[20px]"
+      >
         <div className="flex gap-x-5">
           <label>
             <p className="text-white mb-1">
@@ -115,7 +120,7 @@ function SignupForm({ setIsLoggedIn }) {
             </p>
             <input
               className="bg-richblack-700 flex items-center w-[100%] px-[12px] py-[8px] rounded-md placeholder:text-sm text-white focus:outline-none border-b-richblack-100 border-b-2 mt-1"
-              type={showPassword ? "text" : "password"}
+              type={showPassword1 ? "text" : "password"}
               required
               name="confirmPassword"
               onChange={changeHandler}
@@ -124,9 +129,9 @@ function SignupForm({ setIsLoggedIn }) {
             />
             <span
               className="absolute right-[10px] top-[40px] cursor-pointer"
-              onClick={() => setShowPassword((prev) => !prev)}
+              onClick={() => setShowPassword1((prev) => !prev)}
             >
-              {showPassword ? (
+              {showPassword1 ? (
                 <AiOutlineEyeInvisible className="text-white" />
               ) : (
                 <AiOutlineEye className="text-white" />

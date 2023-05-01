@@ -30,7 +30,7 @@ function Template({ title, desc1, desc2, formType, image, setIsLoggedIn }) {
           </button>
         </div>
       </div>
-      <div className="relative w-11/12 max-w-[480px]">
+      <div className="relative w-11/12 max-w-[480px] hidden md:block">
         <img
           src={frameImage}
           alt="pattern"
@@ -39,7 +39,7 @@ function Template({ title, desc1, desc2, formType, image, setIsLoggedIn }) {
           loading="lazy"
         />
         <img
-          className="absolute -top-4 right-4"
+          className="absolute -top-4 right-4 hidden md:block"
           src={image}
           alt="student"
           width={558}

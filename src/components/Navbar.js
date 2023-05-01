@@ -5,9 +5,9 @@ import { toast } from "react-hot-toast";
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
   return (
-    <div className="flex justify-between w-11/12 max-w-[1160px] mx-auto py-4">
+    <div className="flex justify-between w-full items-center md:w-11/12 md:max-w-[1160px] mx-auto py-4 max-w-screen">
       <NavLink to="/">
-        <img src={Logo} alt="logo" width={160} height={32} loading="lazy" />
+        <img src={Logo} alt="logo" loading="lazy" className="h-[32px] w-[160px] hidden md:block" />
       </NavLink>
       <nav>
         <ul className="flex gap-x-5 text-white">
