@@ -26,17 +26,43 @@ function SignupForm({ setIsLoggedIn }) {
     event.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       toast.error("Password Missmatched");
-    } else {
-      setIsLoggedIn(true);
-      toast.success("Account Created Succesfully");
-      navigate("/dashboard");
+      return;
     }
+    setIsLoggedIn(true);
+    toast.success("Account Created Succesfully");
+    const accountData = {
+        ...formData
+    }
+    const finalData = {
+        ...accountData,
+        ...accountType
+    }
+    navigate("/dashboard");
+    console.log(finalData)
   }
   return (
     <div>
       <div className="flex gap-x-2 bg-richblack-800 my-6 rounded-full max-w-max p-1">
-        <button className={`${accountType === "student" ? "bg-richblack-900 text-white " : "bg-transparent text-black"} py-2 px-5 rounded-full transition-all duration-200" `} onClick={() => setAccountType("student")}>Student</button>
-        <button className={`${accountType !== "student" ? "bg-richblack-900 text-white " : "bg-transparent text-black"} py-2 px-5 rounded-full transition-all duration-200" `} onClick={() => setAccountType("teacher")}>Instructor</button>
+        <button
+          className={`${
+            accountType === "student"
+              ? "bg-richblack-900 text-white "
+              : "bg-transparent text-black"
+          } py-2 px-5 rounded-full transition-all duration-200" `}
+          onClick={() => setAccountType("student")}
+        >
+          Student
+        </button>
+        <button
+          className={`${
+            accountType !== "student"
+              ? "bg-richblack-900 text-white "
+              : "bg-transparent text-black"
+          } py-2 px-5 rounded-full transition-all duration-200" `}
+          onClick={() => setAccountType("teacher")}
+        >
+          Instructor
+        </button>
       </div>
       <form
         onSubmit={submitHanlder}
